@@ -1,7 +1,9 @@
 package com.wishtris;
 
 import com.wishtris.game.Board;
+import com.wishtris.game.GameLoop;
 import com.wishtris.model.Tetromino;
+import com.wishtris.model.TetrominoFactory;
 import com.wishtris.model.TetrominoShape;
 import com.wishtris.ui.GameRenderer;
 import com.wishtris.ui.SidePanel;
@@ -25,10 +27,13 @@ public class WishTrisApp extends Application {
         Scene scene = new Scene(root, 385, 600);
         stage.setTitle("Wishtris");
         stage.setScene(scene);
+
         GraphicsContext gc = canvas.getGraphicsContext2D();
         GameRenderer renderer = new GameRenderer(gc);
-        Tetromino tetromino = new Tetromino(TetrominoShape.I, 1);
-        renderer.render(new Board(), tetromino);
+        Board board = new Board();
+        Tetromino tetromino = TetrominoFactory.createRandom();
+        GameLoop gameLoop = new GameLoop(board, tetromino, renderer);
+        gameLoop.start();
         stage.show();
     }
 }

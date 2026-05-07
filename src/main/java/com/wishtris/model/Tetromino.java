@@ -28,4 +28,8 @@ public class Tetromino {
     public int getColor() {
         return color;
     }
+
+    public void moveDown() {
+        y++;
+    }
 }
