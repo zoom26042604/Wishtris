@@ -33,4 +33,11 @@ public class GameState {
     public void setGameOver() {
         gameOver = true;
     }
+
+    public void reset() {
+        score = 0;
+        level = 1;
+        totalLines = 0;
+        gameOver = false;
+    }
 }

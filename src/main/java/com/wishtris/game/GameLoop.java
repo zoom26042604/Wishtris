@@ -52,6 +52,7 @@ public class GameLoop extends AnimationTimer {
 
         if (!board.canMove(currentTetromino, 0, 0)) {
             gameState.setGameOver();
+            sidePanel.showRestartButton();
             stop();
             renderer.renderGameOver(gameState.getScore());
             return;
@@ -68,5 +69,21 @@ public class GameLoop extends AnimationTimer {
 
     public void setTetromino(Tetromino tetromino) {
         this.currentTetromino = tetromino;
+    }
+
+    public boolean isGameOver() {
+        return gameState.isGameOver();
+    }
+
+    public void restart() {
+        board.reset();
+        gameState.reset();
+        currentTetromino = TetrominoFactory.createRandom();
+        inputHandler.setTetromino(currentTetromino);
+        paused = false;
+        lastDropTime = 0;
+        sidePanel.hideRestartButton();
+        sidePanel.update(gameState.getScore(), gameState.getLevel());
+        start();
     }
 }

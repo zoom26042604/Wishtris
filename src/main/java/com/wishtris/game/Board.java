@@ -80,4 +80,12 @@ public class Board {
         }
         grid[0] = new int[WIDTH];
     }
+
+    public void reset() {
+        for (int row = 0; row < HEIGHT; row++) {
+            for (int col = 0; col < WIDTH; col++) {
+                grid[row][col] = 0;
+            }
+        }
+    }
 }
