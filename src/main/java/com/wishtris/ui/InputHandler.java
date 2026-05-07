@@ -67,6 +67,7 @@ public class InputHandler {
             tetromino.moveDown();
         }
         board.merge(tetromino);
+        board.clearLines();
         tetromino = TetrominoFactory.createRandom();
         gameLoop.setTetromino(tetromino);
         renderer.render(board, tetromino);

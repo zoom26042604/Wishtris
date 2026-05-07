@@ -56,4 +56,14 @@ public class GameRenderer {
             default -> Color.WHITE;
         };
     }
+
+    public void renderGameOver(int score) {
+        gc.setFill(Color.rgb(0, 0, 0, 0.7));
+        gc.fillRect(0, 0, 300, 600);
+        gc.setFill(Color.WHITE);
+        gc.setFont(javafx.scene.text.Font.font(24));
+        gc.fillText("GAME OVER", 70, 280);
+        gc.setFont(javafx.scene.text.Font.font(16));
+        gc.fillText("Score : " + score, 100, 320);
+    }
 }

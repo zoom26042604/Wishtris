@@ -5,6 +5,8 @@ import com.wishtris.model.Tetromino;
 import com.wishtris.ui.GameRenderer;
 import javafx.animation.AnimationTimer;
 import com.wishtris.ui.InputHandler;
+import com.wishtris.game.GameState;
+import com.wishtris.ui.SidePanel;
 
 public class GameLoop extends AnimationTimer {
     private final long DROP_INTERVAL = 500_000_000;
@@ -14,21 +16,25 @@ public class GameLoop extends AnimationTimer {
     private final InputHandler inputHandler;
     private Tetromino currentTetromino;
     private final GameRenderer renderer;
+    private final GameState gameState;
+    private final SidePanel sidePanel;
 
-    public GameLoop(Board board, Tetromino currentTetromino, GameRenderer renderer, InputHandler inputHandler) {
+    public GameLoop(Board board, Tetromino currentTetromino, GameRenderer renderer, InputHandler inputHandler, SidePanel sidePanel) {
         this.board = board;
         this.inputHandler = inputHandler;
         this.currentTetromino = currentTetromino;
-        this.renderer = renderer;
+        this.renderer = renderer; 
+        this.sidePanel = sidePanel;
+        this.gameState = new GameState();
+       
     }
 
     @Override
     public void handle(long now) {
         if (paused)
             return;
-        if (now - lastDropTime < DROP_INTERVAL) {
+        if (now - lastDropTime < DROP_INTERVAL)
             return;
-        }
         lastDropTime = now;
 
         if (board.canMove(currentTetromino, 0, 1)) {
@@ -38,8 +44,19 @@ public class GameLoop extends AnimationTimer {
         }
 
         board.merge(currentTetromino);
+        int lines = board.clearLines();
+        gameState.addLines(lines);
+        sidePanel.update(gameState.getScore(), gameState.getLevel());
         currentTetromino = TetrominoFactory.createRandom();
         inputHandler.setTetromino(currentTetromino);
+
+        if (!board.canMove(currentTetromino, 0, 0)) {
+            gameState.setGameOver();
+            stop();
+            renderer.renderGameOver(gameState.getScore());
+            return;
+        }
+
         renderer.render(board, currentTetromino);
     }
 

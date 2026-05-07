@@ -35,7 +35,7 @@ public class WishTrisApp extends Application {
         Tetromino tetromino = TetrominoFactory.createRandom();
         InputHandler inputHandler = new InputHandler(board, tetromino, renderer, null);
         scene.setOnKeyPressed(inputHandler::handle);
-        GameLoop gameLoop = new GameLoop(board, tetromino, renderer, inputHandler);
+        GameLoop gameLoop = new GameLoop(board, tetromino, renderer, inputHandler, sidePanel);
         inputHandler.setGameLoop(gameLoop);
         gameLoop.start();
         stage.show();

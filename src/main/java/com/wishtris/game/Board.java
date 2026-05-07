@@ -53,4 +53,31 @@ public class Board {
             }
         }
     }
+
+    public int clearLines() {
+        int linesCleared = 0;
+        for (int row = HEIGHT - 1; row >= 0; row--) {
+            if (isLineFull(row)) {
+                removeLine(row);
+                row++;
+                linesCleared++;
+            }
+        }
+        return linesCleared;
+    }
+
+    private boolean isLineFull(int row) {
+        for (int col = 0; col < WIDTH; col++) {
+            if (grid[row][col] == 0)
+                return false;
+        }
+        return true;
+    }
+
+    private void removeLine(int row) {
+        for (int r = row; r > 0; r--) {
+            grid[r] = grid[r - 1].clone();
+        }
+        grid[0] = new int[WIDTH];
+    }
 }
