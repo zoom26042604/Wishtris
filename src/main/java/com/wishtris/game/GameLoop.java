@@ -5,7 +5,6 @@ import com.wishtris.model.Tetromino;
 import com.wishtris.ui.GameRenderer;
 import javafx.animation.AnimationTimer;
 import com.wishtris.ui.InputHandler;
-import com.wishtris.game.GameState;
 import com.wishtris.ui.SidePanel;
 
 public class GameLoop extends AnimationTimer {
@@ -28,7 +27,7 @@ public class GameLoop extends AnimationTimer {
         this.gameState = new GameState();
         this.renderer.setGameState(this.gameState);
         this.inputHandler.setGameState(this.gameState);
-        sidePanel.update(gameState.getScore(), gameState.getLevel());
+        sidePanel.update(gameState.getScore());
     }
 
     @Override
@@ -48,7 +47,7 @@ public class GameLoop extends AnimationTimer {
         board.merge(currentTetromino);
         int lines = board.clearLines();
         gameState.addLines(lines);
-        sidePanel.update(gameState.getScore(), gameState.getLevel());
+        sidePanel.update(gameState.getScore());
         currentTetromino = TetrominoFactory.createRandom();
         inputHandler.setTetromino(currentTetromino);
 
@@ -85,7 +84,7 @@ public class GameLoop extends AnimationTimer {
         paused = false;
         lastDropTime = 0;
         sidePanel.hideRestartButton();
-        sidePanel.update(gameState.getScore(), gameState.getLevel());
+        sidePanel.update(gameState.getScore());
         start();
     }
 }

@@ -4,7 +4,6 @@ import com.wishtris.game.Board;
 import com.wishtris.game.GameLoop;
 import com.wishtris.model.Tetromino;
 import com.wishtris.model.TetrominoFactory;
-import com.wishtris.model.TetrominoShape;
 import com.wishtris.ui.GameRenderer;
 import com.wishtris.ui.InputHandler;
 import com.wishtris.ui.SidePanel;

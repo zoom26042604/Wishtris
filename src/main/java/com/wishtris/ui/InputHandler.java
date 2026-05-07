@@ -82,7 +82,7 @@ public class InputHandler {
         if (gameState != null) {
             gameState.addLines(lines);
             if (sidePanel != null) {
-                sidePanel.update(gameState.getScore(), gameState.getLevel());
+                sidePanel.update(gameState.getScore());
             }
         }
         tetromino = TetrominoFactory.createRandom();

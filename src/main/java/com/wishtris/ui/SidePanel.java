@@ -6,7 +6,6 @@ import javafx.scene.text.Text;
 
 public class SidePanel extends VBox {
     private final Text scoreText;
-    private final Text levelText;
     private final Button restartButton;
     private Runnable onRestart;
 
@@ -17,9 +16,6 @@ public class SidePanel extends VBox {
         scoreText = new Text("Score: 0");
         scoreText.setStyle("-fx-fill: white; -fx-font-size: 16;");
 
-        levelText = new Text("Niveau: 1");
-        levelText.setStyle("-fx-fill: white; -fx-font-size: 16;");
-
         restartButton = new Button("Rejouer");
         restartButton.setStyle("-fx-font-size: 14; -fx-padding: 10;");
         restartButton.setVisible(false);
@@ -29,12 +25,11 @@ public class SidePanel extends VBox {
             }
         });
 
-        this.getChildren().addAll(scoreText, levelText, restartButton);
+        this.getChildren().addAll(scoreText, restartButton);
     }
 
-    public void update(int score, int level) {
+    public void update(int score) {
         scoreText.setText("Score: " + score);
-        levelText.setText("Niveau: " + level);
     }
 
     public void showRestartButton() {
