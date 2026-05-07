@@ -9,4 +9,8 @@ public class Board {
     public Board() {
         grid = new int[HEIGHT][WIDTH];
     }
+
+    public int[][] getGrid() {
+        return grid;
+    }
 }
