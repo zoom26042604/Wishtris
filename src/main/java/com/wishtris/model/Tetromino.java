@@ -12,4 +12,20 @@ public class Tetromino {
         this.x = 3; 
         this.y = 0; 
     }
+
+    public TetrominoShape getShape() {
+        return shape;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getColor() {
+        return color;
+    }
 }
