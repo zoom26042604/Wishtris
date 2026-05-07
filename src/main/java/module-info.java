@@ -7,5 +7,4 @@ module wishtris {
     exports com.wishtris;
     exports com.wishtris.game;
     exports com.wishtris.model;
-    exports com.wishtris.ui;
 }
