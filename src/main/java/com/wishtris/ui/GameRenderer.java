@@ -49,13 +49,6 @@ public class GameRenderer {
                 }
             }
         }
-
-        if (gameState != null) {
-            gc.setFill(Color.WHITE);
-            gc.setFont(Font.font("Arial", 14));
-            gc.fillText("Score: " + gameState.getScore(), 10, 20);
-            gc.fillText("Level: " + gameState.getLevel(), 10, 40);
-        }
     }
 
     private Color getPieceColor(int colorId) {

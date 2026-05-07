@@ -14,6 +14,7 @@ public class InputHandler {
     private final GameRenderer renderer;
     private GameLoop gameLoop;
     private GameState gameState;
+    private SidePanel sidePanel;
 
     public InputHandler(Board board, Tetromino tetromino, GameRenderer renderer, GameLoop gameLoop) {
         this.board = board;
@@ -24,6 +25,10 @@ public class InputHandler {
 
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
+    }
+
+    public void setSidePanel(SidePanel sidePanel) {
+        this.sidePanel = sidePanel;
     }
 
     public void handle(KeyEvent event) {
@@ -76,6 +81,9 @@ public class InputHandler {
         int lines = board.clearLines();
         if (gameState != null) {
             gameState.addLines(lines);
+            if (sidePanel != null) {
+                sidePanel.update(gameState.getScore(), gameState.getLevel());
+            }
         }
         tetromino = TetrominoFactory.createRandom();
         gameLoop.setTetromino(tetromino);

@@ -37,6 +37,7 @@ public class WishTrisApp extends Application {
         scene.setOnKeyPressed(inputHandler::handle);
         GameLoop gameLoop = new GameLoop(board, tetromino, renderer, inputHandler, sidePanel);
         inputHandler.setGameLoop(gameLoop);
+        inputHandler.setSidePanel(sidePanel);
         sidePanel.setOnRestart(gameLoop::restart);
         gameLoop.start();
         stage.show();
