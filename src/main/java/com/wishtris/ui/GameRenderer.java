@@ -2,15 +2,22 @@ package com.wishtris.ui;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import com.wishtris.game.Board;
+import com.wishtris.game.GameState;
 import com.wishtris.model.Tetromino;
 
 public class GameRenderer {
     private final GraphicsContext gc;
     private static final int CELL_SIZE = 30;
+    private GameState gameState;
 
     public GameRenderer(GraphicsContext gc) {
         this.gc = gc;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 
     public void render(Board board, Tetromino tetromino) {
@@ -42,6 +49,13 @@ public class GameRenderer {
                 }
             }
         }
+
+        if (gameState != null) {
+            gc.setFill(Color.WHITE);
+            gc.setFont(Font.font("Arial", 14));
+            gc.fillText("Score: " + gameState.getScore(), 10, 20);
+            gc.fillText("Level: " + gameState.getLevel(), 10, 40);
+        }
     }
 
     private Color getPieceColor(int colorId) {
@@ -61,9 +75,9 @@ public class GameRenderer {
         gc.setFill(Color.rgb(0, 0, 0, 0.7));
         gc.fillRect(0, 0, 300, 600);
         gc.setFill(Color.WHITE);
-        gc.setFont(javafx.scene.text.Font.font(24));
+        gc.setFont(Font.font(24));
         gc.fillText("GAME OVER", 70, 280);
-        gc.setFont(javafx.scene.text.Font.font(16));
+        gc.setFont(Font.font(16));
         gc.fillText("Score : " + score, 100, 320);
     }
 }

@@ -26,7 +26,8 @@ public class GameLoop extends AnimationTimer {
         this.renderer = renderer; 
         this.sidePanel = sidePanel;
         this.gameState = new GameState();
-       
+        this.renderer.setGameState(this.gameState);
+        this.inputHandler.setGameState(this.gameState);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.wishtris.ui;
 
 import com.wishtris.game.Board;
 import com.wishtris.game.GameLoop;
+import com.wishtris.game.GameState;
 import com.wishtris.model.Tetromino;
 import com.wishtris.model.TetrominoFactory;
 
@@ -12,12 +13,17 @@ public class InputHandler {
     private Tetromino tetromino;
     private final GameRenderer renderer;
     private GameLoop gameLoop;
+    private GameState gameState;
 
     public InputHandler(Board board, Tetromino tetromino, GameRenderer renderer, GameLoop gameLoop) {
         this.board = board;
         this.tetromino = tetromino;
         this.renderer = renderer;
         this.gameLoop = gameLoop;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 
     public void handle(KeyEvent event) {
@@ -67,7 +73,10 @@ public class InputHandler {
             tetromino.moveDown();
         }
         board.merge(tetromino);
-        board.clearLines();
+        int lines = board.clearLines();
+        if (gameState != null) {
+            gameState.addLines(lines);
+        }
         tetromino = TetrominoFactory.createRandom();
         gameLoop.setTetromino(tetromino);
         renderer.render(board, tetromino);
