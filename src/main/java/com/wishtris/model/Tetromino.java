@@ -9,8 +9,8 @@ public class Tetromino {
     public Tetromino(TetrominoShape shape, int color) {
         this.shape = shape;
         this.color = color;
-        this.x = 3; 
-        this.y = 0; 
+        this.x = 3;
+        this.y = 0;
     }
 
     public TetrominoShape getShape() {
@@ -31,5 +31,23 @@ public class Tetromino {
 
     public void moveDown() {
         y++;
+    }
+
+    public void moveLeft() {
+        x--;
+    }
+
+    public void moveRight() {
+        x++;
+    }
+
+    private int rotationIndex = 0;
+
+    public int[][] getMatrix() {
+        return shape.getRotation(rotationIndex);
+    }
+
+    public void rotate() {
+        rotationIndex = (rotationIndex + 1) % shape.getRotationCount();
     }
 }

@@ -17,7 +17,7 @@ public class Board {
     }
 
     public boolean canMove(Tetromino tetromino, int dx, int dy) {
-        int[][] shape = tetromino.getShape().getShape();
+        int[][] shape = tetromino.getMatrix();
         int x = tetromino.getX() + dx;
         int y = tetromino.getY() + dy;
 
@@ -41,7 +41,7 @@ public class Board {
     }
 
     public void merge(Tetromino tetromino) {
-        int[][] shape = tetromino.getShape().getShape();
+        int[][] shape = tetromino.getMatrix();
         int x = tetromino.getX();
         int y = tetromino.getY();
 

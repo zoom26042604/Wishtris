@@ -6,6 +6,7 @@ import com.wishtris.model.Tetromino;
 import com.wishtris.model.TetrominoFactory;
 import com.wishtris.model.TetrominoShape;
 import com.wishtris.ui.GameRenderer;
+import com.wishtris.ui.InputHandler;
 import com.wishtris.ui.SidePanel;
 
 import javafx.application.Application;
@@ -32,7 +33,10 @@ public class WishTrisApp extends Application {
         GameRenderer renderer = new GameRenderer(gc);
         Board board = new Board();
         Tetromino tetromino = TetrominoFactory.createRandom();
-        GameLoop gameLoop = new GameLoop(board, tetromino, renderer);
+        InputHandler inputHandler = new InputHandler(board, tetromino, renderer, null);
+        scene.setOnKeyPressed(inputHandler::handle);
+        GameLoop gameLoop = new GameLoop(board, tetromino, renderer, inputHandler);
+        inputHandler.setGameLoop(gameLoop);
         gameLoop.start();
         stage.show();
     }

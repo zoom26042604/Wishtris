@@ -21,7 +21,7 @@ public class GameRenderer {
         for (int row = 0; row < grid.length; row++) {
             for (int col = 0; col < grid[row].length; col++) {
                 if (grid[row][col] != 0) {
-                    gc.setFill(Color.BLUE);
+                    gc.setFill(getPieceColor(grid[row][col]));
                     gc.fillRect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                 } else {
                     gc.setStroke(Color.DARKGRAY);
@@ -30,11 +30,11 @@ public class GameRenderer {
             }
         }
 
-        int[][] matrix = tetromino.getShape().getShape();
+        int[][] matrix = tetromino.getMatrix();
         for (int row = 0; row < matrix.length; row++) {
             for (int col = 0; col < matrix[row].length; col++) {
                 if (matrix[row][col] != 0) {
-                    gc.setFill(Color.CYAN);
+                    gc.setFill(getPieceColor(tetromino.getColor()));
                     gc.fillRect(
                             (tetromino.getX() + col) * CELL_SIZE,
                             (tetromino.getY() + row) * CELL_SIZE,
@@ -42,5 +42,18 @@ public class GameRenderer {
                 }
             }
         }
+    }
+
+    private Color getPieceColor(int colorId) {
+        return switch (colorId) {
+            case 1 -> Color.CYAN;
+            case 2 -> Color.YELLOW;
+            case 3 -> Color.PURPLE;
+            case 4 -> Color.ORANGE;
+            case 5 -> Color.BLUE;
+            case 6 -> Color.GREEN;
+            case 7 -> Color.RED;
+            default -> Color.WHITE;
+        };
     }
 }
